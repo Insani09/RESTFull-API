@@ -34,12 +34,17 @@ return [
     | Supported: "session"
     |
     */
-
+    // Here we added 'api' guard using 'jwt' driver for protect api routes
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ]
     ],
 
     /*

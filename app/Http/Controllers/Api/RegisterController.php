@@ -14,12 +14,13 @@ class RegisterController extends Controller
      */
     public function __invoke(Request $request)
     {
+        //logika untuk register 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required |email|unique:users',
             'password' => 'required | min:8',
         ]);
-
+        //logika perbanddingan yang digunakan jika validasi gagal
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -29,7 +30,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-
+        //logika pengembalian data jika user berhasil  register
         if($user){
             return response()->json([
                 'success' => true,
